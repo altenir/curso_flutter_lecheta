@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hello/pages/hello_page1.dart';
+import 'package:flutter_hello/widgets/blue_button.dart';
 
 import 'hello_page2.dart';
 import 'hello_page3.dart';
@@ -52,31 +53,28 @@ class HomePage extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _button(context, 'LisView',
-                () => _onClickNavigator(context, HelloPage1())),
-            _button(context, 'Page 2',
-                () => _onClickNavigator(context, HelloPage2())),
-            _button(context, 'Page 3,',
-                () => _onClickNavigator(context, HelloPage3())),
+            BlueButton('LisView',
+                onPressed: () => _onClickNavigator(context, HelloPage1())),
+            BlueButton('Page 2',
+                onPressed: () => _onClickNavigator(context, HelloPage2())),
+            BlueButton('Page 3,',
+                onPressed: () => _onClickNavigator(context, HelloPage3())),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _button(
-              context,
+            BlueButton(
               'Snack',
-              () => _onClickSnak(),
+              onPressed: () => _onClickSnak(),
             ),
-            _button(
-              context,
+            BlueButton(
               'Dialog',
-              () => _onClickDialog(),
+              onPressed: () => _onClickDialog(),
             ),
-            _button(
-              context,
+            BlueButton(
               'Toast',
-              () => _onClickToast(),
+              onPressed: () => _onClickToast(),
             ),
           ],
         )
@@ -84,18 +82,9 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  _button(BuildContext context, String text, Function onPressed) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      child: Text(
-        text,
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 20,
-        ),
-      ),
-    );
-  }
+  // _button(String text, Function onPressed) {
+  //   return BlueButton(text, onPressed);
+  // }
 
   void _onClickNavigator(BuildContext context, Widget page) async {
     String s = await Navigator.push(context,
