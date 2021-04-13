@@ -4,26 +4,68 @@ import 'package:flutter_hello/utils/nav.dart';
 import 'package:flutter_hello/widgets/blue_button.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import 'hello_page2.dart';
-import 'hello_page3.dart';
+import 'drawer_list.dart';
+import 'pages/hello_page2.dart';
+import 'pages/hello_page3.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text("Hello Flutter"),
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Center(
+            child: Text("Hello Flutter"),
+          ),
+          bottom: TabBar(
+            tabs: <Widget>[
+              Tab(
+                text: "TAB 1",
+              ),
+              Tab(
+                text: "TAB 2",
+              ),
+              Tab(
+                text: "TAB 3",
+              ),
+            ],
+          ),
         ),
+        body: TabBarView(children: <Widget>[
+          _body(context),
+          Container(
+            color: Colors.green,
+          ),
+          Container(
+            color: Colors.deepPurple,
+          )
+        ]),
+        floatingActionButton: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            FloatingActionButton(
+              child: Icon(Icons.add),
+              onPressed: () {
+                _onClickFab();
+              },
+            ),
+          ],
+        ),
+        drawer: DrawerList(),
       ),
-      body: _body(context),
     );
+  }
+
+  _onClickFab() {
+    print('Adicionar');
   }
 
   _body(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(top: 16),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           _text(),
           _pageView(),
@@ -36,7 +78,7 @@ class HomePage extends StatelessWidget {
   _pageView() {
     return Container(
       margin: EdgeInsets.only(top: 20, bottom: 20),
-      height: 300,
+      height: 250,
       child: PageView(
         children: <Widget>[
           _img("assets/images/dog1.png"),
@@ -109,13 +151,14 @@ class HomePage extends StatelessWidget {
     return Text(
       "Cachorrada",
       style: TextStyle(
-          color: Colors.blue,
-          fontSize: 30,
-          fontWeight: FontWeight.bold,
-          fontStyle: FontStyle.italic,
-          decoration: TextDecoration.underline,
-          decorationColor: Colors.red,
-          decorationStyle: TextDecorationStyle.wavy),
+        color: Colors.blue,
+        fontSize: 25,
+        fontWeight: FontWeight.normal,
+        // fontStyle: FontStyle.italic,
+        // decoration: TextDecoration.underline,
+        decorationColor: Colors.red,
+        // decorationStyle: TextDecorationStyle.wavy,
+      ),
     );
   }
 
